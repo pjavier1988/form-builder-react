@@ -1,0 +1,52 @@
+#bootstrap {
+
+    @import '~bootstrap/scss/bootstrap.scss';
+    //@import 'bootstrap/dist/css/bootstrap.css';
+
+    .card {
+        padding: 5px !important;
+        margin: 5px !important;
+    }
+
+    .formarea {
+        background-color: #F2F4F6 !important;
+        color: #000 !important;
+    }
+
+    .formcomponents {
+        background-color: #F2F4F6 !important;
+    }
+
+    /* FormIO main container */
+    .formbuilder, .formio-component-form { 
+        padding: 16px !important;
+        margin: 5px !important;
+        background-color: #F2F4F6 !important;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        color: #000;
+    }
+
+    .card-header {
+        padding: 5px !important;
+    }
+
+    /* Edit component buttons options */
+    
+    .builder-component {
+        .component-btn-group {
+            .btn {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 35px !important;
+                height: 35px !important;
+                border-radius: 50% !important;
+            }
+        }
+    }
+}
+
+.formio-dialog {
+    @import '~bootstrap/scss/bootstrap.scss';
+}
