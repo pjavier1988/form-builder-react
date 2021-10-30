@@ -1,6 +1,7 @@
-import React from 'react';
-import { Form } from 'react-formio';
+import React, { useEffect } from 'react';
+import Formio from 'formiojs/Formio';
 import { useHistory, useLocation } from 'react-router';
+import { getFormByActivity } from '../../redux/actions/form.actions';
 
 const FormViewer = props => {
 
@@ -9,12 +10,23 @@ const FormViewer = props => {
 
     //if (!location.state?.activity) history.push('/admin/processes');
     const activity = location.state?.activity;
-    
+    const token = location.state?.token;
+
+    useEffect(() => {
+        getFormByActivity(activity?.id, token).then(data => {
+            if (data?.data?.json_body) {
+                Formio.createForm(document.getElementById('builder'), data?.data?.json_body);
+            } else {
+                Formio.createForm(document.getElementById('builder'), formExample);
+            }
+        });
+    }, [])
+
     return (
         <div>
             <h2 style={{ textAlign: 'center' }}>Form of <i><a>"{ activity?.name }"</a></i></h2>
             <div id="bootstrap">
-                <Form form={ form } onSubmit={(data) => console.log(data)} options={ options } />
+                <div id="builder" />
             </div>
         </div>
     )
@@ -26,11 +38,7 @@ FormViewer.propTypes = {
 
 export default FormViewer;
 
-const options = {
-    language: 'sp',
-}
-
-const form = {
+const formExample = {
     "display": "form",
     "settings": {
         "pdf": {

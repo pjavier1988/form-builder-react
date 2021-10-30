@@ -1,11 +1,11 @@
 import React from 'react';
-import FormBuilder from './FormBuilder';
+import Builder from './FormBuilder';
 import FormViewer from './FormViewer';
 
 const Example = props => {
     return (
         <div>
-            <FormBuilder />
+            <Builder />
             <hr/>
             <FormViewer />
         </div>
