@@ -6,4 +6,5 @@ export const urlUpdateActivityTypeByTask = 'activity/update-type-by-task/';
 
 /* Forms URLs */
 export const urlCreateForm = 'forms-api/create';
+export const urlUpdateForm = 'forms-api/update/';
 export const urlGetFormByActivity = 'forms-api/get/activity/';

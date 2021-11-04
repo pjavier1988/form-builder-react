@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import Formio from 'formiojs/dist/formio.full.min'
 import MenuOptions from './MenuOptions';
 import { useLocation } from 'react-router';
+import { getFormByActivity } from '../../redux/actions/form.actions';
 import 'formiojs/dist/formio.full.min.css';
 import 'formiojs/dist/formio.builder.min.css';
 import 'formiojs/dist/formio.embed.min.css';
 import 'formiojs/dist/formio.form.min.css';
 import '../../assets/bootstrap.scss';
-import { getFormByActivity } from '../../redux/actions/form.actions';
 
 const Builder = props => {
 
@@ -26,6 +26,11 @@ const Builder = props => {
         data: { title: 'Data' },
         premium: { title: 'Others' },
     }
+
+    //Options for Builder
+    const optionsBuilder = {
+        builder: builderCustom,
+    }
     
     useEffect( () => {
 
@@ -34,14 +39,15 @@ const Builder = props => {
             const json = data?.data?.json_body;
             if (json) setForm(json);
 
-            Formio.builder(document.getElementById('builder'), (json) ? json:{}, { builder: builderCustom }).then((builder) => {
+            Formio.builder(document.getElementById('builder'), (json) ? json:{}, optionsBuilder).then((builder) => {
                 builder.on('change', (schema) => {
                     setForm(schema);
                 });
             });
 
         });
-    }, [])
+
+    }, [ activity, token ])
 
     return (
         <>
@@ -56,7 +62,6 @@ const Builder = props => {
                 form={ form } />
 
             <div id="bootstrap">
-
                 {/* Div builder container */}
                 <div id="builder" />
             </div>

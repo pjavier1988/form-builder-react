@@ -8,11 +8,12 @@ const FormViewer = props => {
     const location = useLocation();
     const history = useHistory();
 
-    //if (!location.state?.activity) history.push('/admin/processes');
+    if (!location.state?.activity || !location.state?.token) history.push('/admin/processes');
     const activity = location.state?.activity;
     const token = location.state?.token;
 
     useEffect(() => {
+
         getFormByActivity(activity?.id, token).then(data => {
             if (data?.data?.json_body) {
                 Formio.createForm(document.getElementById('builder'), data?.data?.json_body);
@@ -20,11 +21,12 @@ const FormViewer = props => {
                 Formio.createForm(document.getElementById('builder'), formExample);
             }
         });
-    }, [])
+
+    }, [ activity, token ]);
 
     return (
         <div>
-            <h2 style={{ textAlign: 'center' }}>Form of <i><a>"{ activity?.name }"</a></i></h2>
+            <h2 style={{ textAlign: 'center' }}>Form of <i><a href>"{ activity?.name }"</a></i></h2>
             <div id="bootstrap">
                 <div id="builder" />
             </div>

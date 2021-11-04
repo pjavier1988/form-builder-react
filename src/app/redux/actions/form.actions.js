@@ -28,3 +28,18 @@ export const getFormByActivity = async (activityId, token) => {
 
     return response.data;
 }
+
+export const updateForm = async (id, formSchema, token) => {
+
+    const data = {
+        json_body: formSchema,
+    };
+
+    const response = await axios.put(`${urls.URL_BASE}${urls.urlUpdateForm}${id}`, data, {
+        headers: {
+          Authorization: 'Bearer ' + token
+        }
+    });
+
+    return response.data;
+}
