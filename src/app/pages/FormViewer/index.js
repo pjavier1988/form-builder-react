@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import Formio from 'formiojs/Formio';
+import Formio from 'formiojs/dist/formio.full.min'
 import { useHistory, useLocation } from 'react-router';
 import { getFormByActivity } from '../../redux/actions/form.actions';
 

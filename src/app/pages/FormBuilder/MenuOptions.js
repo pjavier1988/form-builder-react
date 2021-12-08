@@ -52,12 +52,18 @@ const MenuOptions = ({ process, token, form, activity }) => {
             <button
                 className="p-button p-component p-button-danger p-mx-1"
                 style={{ width: '93px' }}
-                onClick={() => history.push({
-                    pathname: '/bpmn/builder',
-                    state: {
-                        process: process,
-                    },
-                })} >
+                onClick={() => {
+                    if (process) {
+                        history.push({
+                            pathname: '/bpmn/builder',
+                            state: {
+                                process: process,
+                            },
+                        })
+                    } else {
+                        history.goBack();
+                    }
+                }} >
                     <span className="p-button-icon p-c pi pi-times p-button-icon-left"></span>
                     <span className="p-button-label p-c">Cancel</span>
             </button>
