@@ -12,11 +12,13 @@ import '../../assets/bootstrap.scss';
 const Builder = props => {
 
     const location = useLocation();
-    const [ form, setForm ] = useState({})
+    const [ formSchema, setFormSchema ] = useState({})
 
     const process = location.state?.process;
     const activity = location.state?.activity;
     const token = location.state?.token;
+
+    // const [activity, setActivity] = useState({});
 
     //Custom builders menu
     const builderCustom = {
@@ -37,14 +39,13 @@ const Builder = props => {
         getFormByActivity(activity?.id, token).then(data => {
 
             const json = data?.data?.json_body;
-            if (json) setForm(json);
+            if (json) setFormSchema(json);
 
             Formio.builder(document.getElementById('builder'), (json) ? json:{}, optionsBuilder).then((builder) => {
                 builder.on('change', (schema) => {
-                    setForm(schema);
+                    setFormSchema(schema);
                 });
             });
-
         });
 
     }, [ activity, token ])
@@ -52,14 +53,14 @@ const Builder = props => {
     return (
         <>
             <h2 style={{ textAlign: 'center' }}>
-                Build form at <i><a>"{activity?.name}"</a></i>
+                Form builder for <a>{ activity?.name }</a>
             </h2>
 
             <MenuOptions
                 activity={ activity }
                 process={ process }
                 token={ token }
-                form={ form } />
+                formSchema={ formSchema } />
 
             <div id="bootstrap">
                 {/* Div builder container */}
